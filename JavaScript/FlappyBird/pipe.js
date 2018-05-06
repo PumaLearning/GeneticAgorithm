@@ -1,8 +1,12 @@
-function Pipe(i, IMG_N, IMG_S, GAP, d, n) {
+function Pipe(i, IMG_N, IMG_S, GAP, d, n, patron) {
 
     this.safeDistance = 20;
 
-    this.posDOWN = createVector(width + ((d + IMG_N.width) *i), floor(random(height/2 - this.safeDistance, height - this.safeDistance)));
+    this.loop = 1;
+    this.isStatic = patron.length !== 0;
+
+    if(!this.isStatic) this.posDOWN = createVector(width + ((d + IMG_N.width) *i), floor(random(height/2 - this.safeDistance, height - this.safeDistance)));
+    else this.posDOWN = createVector(width + ((d + IMG_N.width) *i), patron[i]);
     this.posUP = createVector(this.posDOWN.x, this.posDOWN.y - GAP - IMG_N.height);
 
     this.velocity = 3;
@@ -12,7 +16,11 @@ function Pipe(i, IMG_N, IMG_S, GAP, d, n) {
         this.posDOWN.x -= this.velocity;
 
         if(this.posDOWN.x < -IMG_S.width) {
-            this.posDOWN = createVector((d + IMG_S.width) * n, floor(random(height/2 - this.safeDistance, height - this.safeDistance)));
+            if(!this.isStatic) this.posDOWN = createVector((d + IMG_S.width) * n, floor(random(height/2 - this.safeDistance, height - this.safeDistance)));
+            else {
+                this.loop = patron[(this.loop + 1)*(i + n)] === undefined ? this.loop = 1 : this.loop++;
+                this.posDOWN = createVector((d + IMG_S.width) * n, patron[this.loop*(i + n)]);
+            }
             this.posUP = createVector(this.posDOWN.x, this.posDOWN.y - GAP - IMG_N.height);
         }
     };
