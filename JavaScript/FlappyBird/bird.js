@@ -31,7 +31,7 @@ function Bird(IMG) {
         }
 
         var hijo = new Bird(this.img);
-        hijo.initY = cruce % 2 === 0 ? this.initY : pareja.initY;
+        hijo.initY = this.score > pareja.score ? this.initY : pareja.initY;
         for(let i = 0; i < hijo.max_moment; i++) {
             var mutacion = random(1);
             if(mutacion < mutation_rate) hijo.actions[i] = floor(random(2));
