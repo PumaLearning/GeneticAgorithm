@@ -49,8 +49,10 @@ function draw() {
     timer++
   } while(timer % xSpeed !== 0)
 
-  if(onlyBest) Population[0].show()
-  else {
+  if(onlyBest) {
+    Population[0].show()
+    Population[1].show()
+  } else {
   for(let individual of Population)
     individual.show()
   }

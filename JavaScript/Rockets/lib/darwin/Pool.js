@@ -45,8 +45,12 @@ class Pool {
 
     next[0] = this.gimmeBaby(this.best)
     next[0].c = color(0, 255, 0)
+
+    next[1] = this.gimmeBaby(this.best)
+    next[1].brain.mutate()
+    next[1].c = color(0, 0, 255)
     
-    for(let i = 1; i < this.parents.length; i++) {
+    for(let i = 2; i < this.parents.length; i++) {
       let daddy = this.selectParent()
       let child = this.gimmeBaby(daddy)
       child.brain.mutate()
