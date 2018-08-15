@@ -3,6 +3,7 @@ class Pool {
     this.fitSum = 0
     this.best = undefined
     this.parents = parents
+    this.minSteps = Infinity
   }
 
   fitnessSum() {
@@ -15,6 +16,9 @@ class Pool {
         bestFitness = individual.fitness
       }
     }
+
+    this.minSteps = this.best.brain.loop * this.best.brain.step
+    console.log(minSteps)
   }
 
   selectParent() {

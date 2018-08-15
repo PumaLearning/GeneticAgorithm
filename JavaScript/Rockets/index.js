@@ -1,4 +1,4 @@
-const xSpeed = 5
+const xSpeed = 1
 const POPULATION_NUMBER = 200
 
 let pool
@@ -7,6 +7,7 @@ let fitnessManager
 let Population = []
 
 let timer = 0
+let minSteps = Infinity
 
 function setup() {
   createCanvas(600, 600)
@@ -25,6 +26,7 @@ function draw() {
   do {
     for(let individual of Population) {
       if(!individual.isDead) {
+        individual.isDead = individual.brain.loop * individual.brain.step > minSteps 
         individual.update()
         individual.checkTarget(target)
         individual.stats(fitnessManager)
@@ -38,12 +40,17 @@ function draw() {
     if(ko === POPULATION_NUMBER) {
       let pool = new Pool(Population)
       Population = pool.nextGeneration()
+      minSteps = pool.minSteps
     }
+
 
     timer++
   } while(timer % xSpeed !== 0)
 
   for(let individual of Population)
     individual.show()
+}
 
+function keyPressed() {
+  
 }
