@@ -1,4 +1,3 @@
-const xSpeed = 1
 const POPULATION_NUMBER = 200
 
 let pool
@@ -8,6 +7,9 @@ let Population = []
 
 let timer = 0
 let minSteps = Infinity
+
+let xSpeed = 1
+let onlyBest = false
 
 function setup() {
   createCanvas(600, 600)
@@ -47,10 +49,13 @@ function draw() {
     timer++
   } while(timer % xSpeed !== 0)
 
+  if(onlyBest) Population[0].show()
+  else {
   for(let individual of Population)
     individual.show()
+  }
 }
 
-function keyPressed() {
-  
+function keyReleased() {
+  if(key == ' ') onlyBest = !onlyBest
 }
