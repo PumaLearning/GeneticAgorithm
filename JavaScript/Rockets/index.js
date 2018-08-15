@@ -1,4 +1,4 @@
-const xSpeed = 1
+const xSpeed = 5
 const POPULATION_NUMBER = 200
 
 let pool

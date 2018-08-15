@@ -37,7 +37,7 @@ class Dot {
   }
 
   stats(fitnessManager) {
-    if(this.targetReached) 1 / pow(this.brain.step * this.brain.loop, 2)    
+    if(this.targetReached) 1 / 16 + 1000 / pow(this.brain.step * this.brain.loop, 2) 
     else this.fitness = fitnessManager.calculateFitnessPow(this, 2)
   }
 
